@@ -16,10 +16,10 @@
                 <label for="password">Contraseña</label>
                 <input formControlName="password" type="password" placeholder="Contraseña" class="form-input">
             </div>
-            <div class="form-steps">
+            <!-- <div class="form-steps">
                 <a class="link" href="/">¿Se te ha olvidado la contraseña?</a>
-            </div>
-            <div *ngIf="true">
+            </div> -->
+            <div *ngIf="error_contrasena">
                 Ocurrio un error con tu email o password
             </div>
             <div class="form-action">

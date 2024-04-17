@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@modules/auth/services/auth.service';
-import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-auth-pages',
@@ -13,7 +14,8 @@ export class AuthPagesComponent implements OnInit{
 
   constructor(
     private authService: AuthService,
-    private cookie: CookieService,
+    private router: Router
+
   ){}
 
   ngOnInit():void{
@@ -31,17 +33,23 @@ export class AuthPagesComponent implements OnInit{
       )
     });
   }
-
+  error_contrasena: boolean = false;
   sendLogin():void{
     const {email, password} = this.formLogin.value;
-    this.authService.sendCredentials(email, password).subscribe(response => {
-      // const {tokenSession, data} = response;
-      // this.cookie.set('token', tokenSession, 4, '/')
-    }, error => {
-      const {status, statusText} = error;
-      console.table([status, statusText]);
-      console.log(error.error);
-    });
+    if(email == 'test@test.com' && password == '12345'){
+      this.router.navigate(['/', 'tracksx'])
+      this.error_contrasena = false;
+    }else{
+      this.error_contrasena = true;
+    }
+    // this.authService.sendCredentials(email, password).subscribe(response => {
+    //   // const {tokenSession, data} = response;
+    //   // this.cookie.set('token', tokenSession, 4, '/')
+    // }, error => {
+    //   const {status, statusText} = error;
+    //   console.table([status, statusText]);
+    //   console.log(error.error);
+    // });
   }
 
 }
